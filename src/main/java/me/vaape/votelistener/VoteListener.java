@@ -120,7 +120,6 @@ public class VoteListener extends JavaPlugin implements Listener {
         //48 hours = 172800000
         if (timeSinceLastVote >= 86400000 && timeSinceLastVote <= 172800000) { //If increasing streak increase streak
             // by 1, and set last vote time to now
-            config.set("streaks." + UUID + ".last vote time", nowInMillis);
             config.set("streaks." + UUID + ".streak", config.getInt("streaks." + UUID + ".streak") + 1);
 
             if (offlinePlayer.isOnline()) {
@@ -131,177 +130,173 @@ public class VoteListener extends JavaPlugin implements Listener {
             }
         } else if (timeSinceLastVote >= 172800000) { //If longer than 48 hours since last vote, set streak to 1, and
             // set last vote time to now
-            config.set("streaks." + UUID + ".last vote time", nowInMillis);
             config.set("streaks." + UUID + ".streak", 1);
         }
+        config.set("streaks." + UUID + ".last vote time", nowInMillis);
         saveConfig();
 
         //This stops players getting the votestreak reward more than once in one vote session
-        boolean hasRecievedReward = false;
         if (timeSinceLastVote < 45000000) { //12.5 Hours
-            hasRecievedReward = true;
             return;
         }
 
-        if (!hasRecievedReward) {
-            switch (config.getInt("streaks." + UUID + ".streak")) {
-                case 5:
-                    Rewards.getInstance().giveReward("5_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + " 5 " +
-                                                    "days " + ChatColor.BLUE + ChatColor.BOLD +
-                                                    "in a row and received a 5 day streak token!");
-                    break;
-                case 10:
-                    Rewards.getInstance().giveReward("10_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + " 10 " +
-                                                    "days " + ChatColor.BLUE + ChatColor.BOLD +
-                                                    "in a row and received a 10 day streak token!");
-                    break;
-                case 20:
-                    Rewards.getInstance().giveReward("20_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.BOLD + " 20 days " + ChatColor.BLUE + ChatColor.BOLD +
-                                                    "in a row and received a 20 day streak token!");
-                    break;
-                case 35:
-                    Rewards.getInstance().giveReward("35_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.BOLD + " 35 days " + ChatColor.BLUE + ChatColor.BOLD +
-                                                    "in a row and received a 35 day streak token!");
-                    break;
-                case 50:
-                    Rewards.getInstance().giveReward("50_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.BOLD + " 50 days " + ChatColor.BLUE + ChatColor.BOLD +
-                                                    "in a row and received a 50 day streak token!");
-                    break;
-                case 75:
-                    Rewards.getInstance().giveReward("75_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 100 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 100 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    break;
-                case 100:
-                    Rewards.getInstance().giveReward("100_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 100 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 100 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    break;
-                case 125:
-                    Rewards.getInstance().giveReward("125_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 125 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 125 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                case 150:
-                    Rewards.getInstance().giveReward("150_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 150 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 150 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    break;
-                case 175:
-                    Rewards.getInstance().giveReward("175_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 175 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 175 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                case 200:
-                    Rewards.getInstance().giveReward("200_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 200 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 200 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    break;
-                case 400:
-                    Rewards.getInstance().giveReward("400_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 400 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a row and received a 400 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                case 450:
-                    Rewards.getInstance().giveReward("450_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 450 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a row and received a 450 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    break;
-                case 500:
-                    Rewards.getInstance().giveReward("500_day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 500 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a row and received a 500 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    break;
-                case 1000:
-                    Rewards.getInstance().giveReward("1000 day_streak", offlinePlayer, false);
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 1000 days " + ChatColor.RED +
-                                                    ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a row and received a 1000 day streak token!");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    Bukkit.broadcastMessage("");
-                    break;
-                default:
-            }
+        switch (config.getInt("streaks." + UUID + ".streak")) {
+            case 5:
+                Rewards.getInstance().giveReward("5_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + " 5 " +
+                                                "days " + ChatColor.BLUE + ChatColor.BOLD +
+                                                "in a row and received a 5 day streak token!");
+                break;
+            case 10:
+                Rewards.getInstance().giveReward("10_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + " 10 " +
+                                                "days " + ChatColor.BLUE + ChatColor.BOLD +
+                                                "in a row and received a 10 day streak token!");
+                break;
+            case 20:
+                Rewards.getInstance().giveReward("20_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.BOLD + " 20 days " + ChatColor.BLUE + ChatColor.BOLD +
+                                                "in a row and received a 20 day streak token!");
+                break;
+            case 35:
+                Rewards.getInstance().giveReward("35_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.BOLD + " 35 days " + ChatColor.BLUE + ChatColor.BOLD +
+                                                "in a row and received a 35 day streak token!");
+                break;
+            case 50:
+                Rewards.getInstance().giveReward("50_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.BOLD + " 50 days " + ChatColor.BLUE + ChatColor.BOLD +
+                                                "in a row and received a 50 day streak token!");
+                break;
+            case 75:
+                Rewards.getInstance().giveReward("75_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 100 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
+                                                "row and received a 100 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                break;
+            case 100:
+                Rewards.getInstance().giveReward("100_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 100 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
+                                                "row and received a 100 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                break;
+            case 125:
+                Rewards.getInstance().giveReward("125_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 125 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
+                                                "row and received a 125 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+            case 150:
+                Rewards.getInstance().giveReward("150_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 150 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
+                                                "row and received a 150 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                break;
+            case 175:
+                Rewards.getInstance().giveReward("175_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 175 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
+                                                "row and received a 175 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+            case 200:
+                Rewards.getInstance().giveReward("200_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 200 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
+                                                "row and received a 200 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                break;
+            case 400:
+                Rewards.getInstance().giveReward("400_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 400 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a row and received a 400 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+            case 450:
+                Rewards.getInstance().giveReward("450_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 450 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a row and received a 450 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                break;
+            case 500:
+                Rewards.getInstance().giveReward("500_day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 500 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a row and received a 500 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                break;
+            case 1000:
+                Rewards.getInstance().giveReward("1000 day_streak", offlinePlayer, false);
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
+                                                " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 1000 days " + ChatColor.RED +
+                                                ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a row and received a 1000 day streak token!");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                Bukkit.broadcastMessage("");
+                break;
+            default:
         }
 
         switch (config.getInt(UUID + ".streak")) {
