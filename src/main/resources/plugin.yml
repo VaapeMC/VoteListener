@@ -1,10 +1,13 @@
 name: VoteListener
 main: me.vaape.votelistener.VoteListener
 version: 1.0
-api-version: 1.17
+api-version: 1.18
 depend: [Rewards, Votifier]
 commands:
   vote:
     description: Sends voting information
   votestreak:
     description: Shows information on player's vote streaks
+  reloadvote:
+    permission: vote.reload
+    description: Reload vote config

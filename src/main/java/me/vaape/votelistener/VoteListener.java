@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 public class VoteListener extends JavaPlugin implements Listener {
     public static VoteListener plugin;
-    private final FileConfiguration config = this.getConfig();
+    private FileConfiguration config = this.getConfig();
 
     public void onEnable() {
         plugin = this;
@@ -72,6 +72,10 @@ public class VoteListener extends JavaPlugin implements Listener {
             } else {
                 sender.sendMessage(ChatColor.RED + "Only players can use this command.");
             }
+        } else if (label.equalsIgnoreCase("reloadvote")) {
+            plugin.reloadConfig();
+            this.config = this.getConfig();
+            sender.sendMessage(ChatColor.GREEN + "Vote config reloaded.");
         }
         return true;
     }
@@ -89,7 +93,7 @@ public class VoteListener extends JavaPlugin implements Listener {
 
         OfflinePlayer offlinePlayer = Bukkit.getServer().getOfflinePlayer(username);
 
-        String reward = Rewards.getInstance().pickReward();
+        String reward = Rewards.getInstance().pickVoteReward();
         Rewards.getInstance().giveReward(reward, offlinePlayer, false);
         Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "[Vote] " + ChatColor.BLUE + username + " used /vote and " +
                                         "received " + ChatColor.ITALIC + Rewards.getInstance().getConfig().get(
@@ -156,22 +160,22 @@ public class VoteListener extends JavaPlugin implements Listener {
                                                     "in a row and received a 10 day streak token!");
                     break;
                 case 20:
-                    Rewards.getInstance().giveReward("25_day_streak", offlinePlayer, false);
+                    Rewards.getInstance().giveReward("20_day_streak", offlinePlayer, false);
                     Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.BOLD + " 25 days " + ChatColor.BLUE + ChatColor.BOLD +
-                                                    "in a row and received a 25 day streak token!");
+                                                    " has voted " + ChatColor.RED + ChatColor.BOLD + " 20 days " + ChatColor.BLUE + ChatColor.BOLD +
+                                                    "in a row and received a 20 day streak token!");
                     break;
                 case 35:
                     Rewards.getInstance().giveReward("35_day_streak", offlinePlayer, false);
                     Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.BOLD + " 50 days " + ChatColor.BLUE + ChatColor.BOLD +
-                                                    "in a row and received a 50 day streak token!");
+                                                    " has voted " + ChatColor.RED + ChatColor.BOLD + " 35 days " + ChatColor.BLUE + ChatColor.BOLD +
+                                                    "in a row and received a 35 day streak token!");
                     break;
                 case 50:
                     Rewards.getInstance().giveReward("50_day_streak", offlinePlayer, false);
                     Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.BOLD + " 75 days " + ChatColor.BLUE + ChatColor.BOLD +
-                                                    "in a row and received a 75 day streak token!");
+                                                    " has voted " + ChatColor.RED + ChatColor.BOLD + " 50 days " + ChatColor.BLUE + ChatColor.BOLD +
+                                                    "in a row and received a 50 day streak token!");
                     break;
                 case 75:
                     Rewards.getInstance().giveReward("75_day_streak", offlinePlayer, false);
@@ -192,9 +196,9 @@ public class VoteListener extends JavaPlugin implements Listener {
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 150 days " + ChatColor.RED +
+                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 100 days " + ChatColor.RED +
                                                     ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 150 day streak token!");
+                                                    "row and received a 100 day streak token!");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
@@ -205,9 +209,9 @@ public class VoteListener extends JavaPlugin implements Listener {
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 200 days " + ChatColor.RED +
+                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 125 days " + ChatColor.RED +
                                                     ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 200 day streak token!");
+                                                    "row and received a 125 day streak token!");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
@@ -217,9 +221,9 @@ public class VoteListener extends JavaPlugin implements Listener {
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 250 days " + ChatColor.RED +
+                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 150 days " + ChatColor.RED +
                                                     ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 250 day streak token!");
+                                                    "row and received a 150 day streak token!");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
@@ -230,9 +234,9 @@ public class VoteListener extends JavaPlugin implements Listener {
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 300 days " + ChatColor.RED +
+                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 175 days " + ChatColor.RED +
                                                     ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 300 day streak token!");
+                                                    "row and received a 175 day streak token!");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
@@ -242,9 +246,9 @@ public class VoteListener extends JavaPlugin implements Listener {
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "[VoteStreaks] " + ChatColor.BLUE + ChatColor.BOLD + username +
-                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 350 days " + ChatColor.RED +
+                                                    " has voted " + ChatColor.RED + ChatColor.MAGIC + "!" + ChatColor.RED + ChatColor.BOLD + " 200 days " + ChatColor.RED +
                                                     ChatColor.MAGIC + "!" + ChatColor.BLUE + ChatColor.BOLD + "in a " +
-                                                    "row and received a 350 day streak token!");
+                                                    "row and received a 200 day streak token!");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");
                     Bukkit.broadcastMessage("");

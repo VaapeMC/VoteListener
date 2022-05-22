@@ -15,11 +15,13 @@ repositories {
     maven {
         url = 'https://papermc.io/repo/repository/maven-public/'
     }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
-    compileOnly('io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT')
-    compileOnly('me.vaape:rewards:1.0.0')
-    // Requires local maven install
-    compileOnly('com.vexsoftware:votifier:1.9')
+    compileOnly('io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT')
+    implementation files('libs/nuvotifier-2.7.3.jar')
+    implementation files('libs/Rewards-1.0.0.jar')
 }
